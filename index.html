@@ -1565,12 +1565,15 @@ document.querySelectorAll('.stat-num[data-target]').forEach(el => countObserver.
     p.className = 'hero-particle';
     p.textContent = emojis[i % emojis.length];
     const size = Math.random() * 14 + 18;
+    const dur = Math.random() * 20 + 14;
+    // randomize starting position across full height so emojis appear everywhere, not just bottom
+    const startPct = Math.random() * 110 - 10; // -10% to 100%
     Object.assign(p.style, {
       fontSize: size + 'px',
       left: (Math.random() * 98) + '%',
-      bottom: '-60px',
-      animationDuration: (Math.random() * 20 + 14) + 's',
-      animationDelay: (Math.random() * 12) + 's',
+      bottom: startPct + '%',
+      animationDuration: dur + 's',
+      animationDelay: (-Math.random() * dur) + 's', // negative delay = already mid-flight
     });
     container.appendChild(p);
   }
