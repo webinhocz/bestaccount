@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Account – Účetní & daňová kancelář</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0F172A;
+  --navy2: #1E293B;
+  --slate: #334155;
+  --blue: #0369A1;
+  --blue-light: #0EA5E9;
+  --gold: #F59E0B;
+  --bg: #F8FAFC;
+  --text: #020617;
+  --muted: #475569;
+  --white: #ffffff;
+  --card-bg: rgba(255,255,255,0.07);
+  --glass: rgba(255,255,255,0.05);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Poppins',sans-serif}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+
+/* ── NAVBAR ── */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  transition:all .3s ease;
+}
+.nav-brand{display:flex;align-items:center;gap:.75rem;cursor:pointer}
+.nav-logo{width:42px;height:42px}
+.nav-brand-text{color:#fff}
+.nav-brand-text span{display:block;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;line-height:1.1}
+.nav-brand-text small{font-size:.7rem;color:#94A3B8;letter-spacing:.05em}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{color:#CBD5E1;font-size:.82rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--blue);color:#fff;padding:.5rem 1.25rem;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .2s;border:none}
+.nav-cta:hover{background:var(--blue-light)}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-langs{display:flex;gap:.4rem}
+.nav-langs button{background:transparent;border:1px solid rgba(255,255,255,.2);color:#94A3B8;padding:.2rem .5rem;border-radius:4px;font-size:.7rem;cursor:pointer;transition:all .2s}
+.nav-langs button:hover,.nav-langs button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:.25rem}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:all .3s}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0C1A2E 100%);
+  position:relative;overflow:hidden;padding-top:70px;
+}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-particle{
+  position:absolute;border-radius:50%;
+  animation:float linear infinite;opacity:.15;
+}
+@keyframes float{
+  0%{transform:translateY(100vh) rotate(0)}
+  100%{transform:translateY(-10vh) rotate(360deg)}
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(3,105,161,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(3,105,161,.08) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-glow{
+  position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(3,105,161,.25) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.15)}}
+.hero-content{position:relative;z-index:1;text-align:center;padding:2rem;max-width:900px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(3,105,161,.2);border:1px solid rgba(3,105,161,.4);
+  color:#7DD3FC;padding:.4rem 1rem;border-radius:99px;font-size:.78rem;font-weight:600;
+  letter-spacing:.06em;margin-bottom:1.5rem;
+  animation:fadeInDown .8s ease both;
+}
+.hero-badge svg{width:14px;height:14px}
+.hero-title{
+  font-size:clamp(2.5rem,7vw,5rem);font-weight:800;color:#fff;
+  line-height:1.1;margin-bottom:1rem;
+  animation:fadeInUp .8s ease .2s both;
+}
+.hero-title .accent{color:var(--blue-light)}
+.hero-subtitle{
+  font-size:clamp(1rem,2.5vw,1.3rem);color:#94A3B8;max-width:600px;margin:0 auto 2.5rem;
+  line-height:1.7;animation:fadeInUp .8s ease .4s both;
+}
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeInUp .8s ease .6s both}
+.btn-primary{
+  background:var(--blue);color:#fff;padding:.85rem 2rem;border-radius:8px;font-weight:700;
+  font-size:.95rem;cursor:pointer;transition:all .25s;border:none;display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-primary:hover{background:#0284C7;transform:translateY(-2px);box-shadow:0 8px 30px rgba(3,105,161,.4)}
+.btn-outline{
+  background:transparent;color:#fff;padding:.85rem 2rem;border-radius:8px;font-weight:600;
+  font-size:.95rem;cursor:pointer;transition:all .25s;border:2px solid rgba(255,255,255,.2);display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.07)}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  color:#475569;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;cursor:pointer;
+  animation:fadeIn 1s ease 1.2s both;
+}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid #475569;border-bottom:2px solid #475569;transform:rotate(45deg);animation:bounce 1.5s ease infinite}
+@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(4px)}}
+
+/* ── STATS STRIP ── */
+#stats{
+  background:var(--navy);padding:2rem 0;
+  border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);
+}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:1100px;margin:0 auto;padding:0 2rem}
+.stat-item{text-align:center;padding:1rem}
+.stat-num{font-family:'Poppins',sans-serif;font-size:2.2rem;font-weight:800;color:var(--blue-light);line-height:1}
+.stat-label{color:#64748B;font-size:.8rem;margin-top:.3rem;letter-spacing:.04em}
+
+/* ── SECTIONS ── */
+.section{padding:5rem 2rem}
+.section-dark{background:var(--navy);color:#fff}
+.section-mid{background:var(--navy2);color:#fff}
+.container{max-width:1100px;margin:0 auto}
+.section-tag{
+  display:inline-block;background:rgba(3,105,161,.15);color:var(--blue-light);
+  padding:.3rem .8rem;border-radius:4px;font-size:.75rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;
+}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:.75rem;line-height:1.2}
+.section-sub{color:var(--muted);font-size:1.05rem;line-height:1.7;max-width:680px}
+.section-dark .section-sub{color:#94A3B8}
+.section-mid .section-sub{color:#94A3B8}
+
+/* ── WHY US ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:3rem}
+.why-list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.why-item{
+  display:flex;align-items:flex-start;gap:.9rem;padding:1rem 1.25rem;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;transition:all .25s;cursor:default;
+}
+.why-item:hover{background:rgba(3,105,161,.12);border-color:rgba(3,105,161,.35);transform:translateX(4px)}
+.why-icon{
+  width:32px;height:32px;min-width:32px;border-radius:8px;
+  background:rgba(3,105,161,.25);display:flex;align-items:center;justify-content:center;
+}
+.why-icon svg{width:16px;height:16px;stroke:var(--blue-light)}
+.why-item p{color:#CBD5E1;font-size:.88rem;line-height:1.6}
+.why-visual{
+  background:linear-gradient(135deg,rgba(3,105,161,.15),rgba(14,165,233,.05));
+  border:1px solid rgba(3,105,161,.2);border-radius:16px;padding:2rem;
+}
+.why-visual-title{color:var(--blue-light);font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:1.5rem}
+.why-tag-cloud{display:flex;flex-wrap:wrap;gap:.5rem}
+.why-tag{
+  background:rgba(3,105,161,.2);border:1px solid rgba(3,105,161,.3);color:#7DD3FC;
+  padding:.35rem .85rem;border-radius:99px;font-size:.78rem;font-weight:600;
+  cursor:default;transition:all .2s;
+}
+.why-tag:hover{background:rgba(3,105,161,.4);color:#fff}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.service-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:1.75rem;cursor:pointer;
+  transition:all .3s ease;position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(3,105,161,.1),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.service-card:hover{transform:translateY(-4px);border-color:rgba(3,105,161,.4);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.service-card:hover::before{opacity:1}
+.service-icon{
+  width:48px;height:48px;background:rgba(3,105,161,.2);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;
+}
+.service-icon svg{width:24px;height:24px;stroke:var(--blue-light)}
+.service-title{font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.6rem}
+.service-body{color:#94A3B8;font-size:.85rem;line-height:1.7}
+.service-list{color:#94A3B8;font-size:.82rem;line-height:1.9;list-style:none;margin-top:.5rem}
+.service-list li::before{content:'›  ';color:var(--blue-light)}
+
+/* ── TAX DEFER HIGHLIGHT ── */
+#odklad{
+  background:linear-gradient(135deg,var(--navy) 0%,#0C2340 100%);
+  padding:5rem 2rem;position:relative;overflow:hidden;
+}
+.odklad-glow{
+  position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(3,105,161,.3) 0%,transparent 70%);pointer-events:none;
+}
+.odklad-card{
+  max-width:800px;margin:0 auto;text-align:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(3,105,161,.3);
+  border-radius:20px;padding:3rem;position:relative;z-index:1;
+}
+.odklad-card h2{font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#fff;margin-bottom:1.25rem}
+.odklad-card h2 span{color:var(--blue-light)}
+.odklad-card p{color:#94A3B8;font-size:1rem;line-height:1.8;margin-bottom:.8rem}
+.odklad-cta{margin-top:2rem}
+
+/* ── TEAM ── */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-top:3rem}
+.team-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:1.25rem;text-align:center;transition:all .25s;cursor:default;
+}
+.team-card:hover{background:rgba(3,105,161,.1);border-color:rgba(3,105,161,.3);transform:translateY(-3px)}
+.team-avatar{
+  width:56px;height:56px;border-radius:50%;background:rgba(3,105,161,.25);
+  display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;
+  border:2px solid rgba(3,105,161,.4);
+}
+.team-avatar svg{width:26px;height:26px;stroke:var(--blue-light)}
+.team-name{font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.team-role{color:#64748B;font-size:.73rem;margin-bottom:.4rem}
+.team-email{color:var(--blue-light);font-size:.72rem;word-break:break-all}
+
+/* ── CERTS ── */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:3rem}
+.cert-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:1.5rem;display:flex;align-items:flex-start;gap:1rem;
+  transition:all .25s;cursor:default;
+}
+.cert-card:hover{background:rgba(3,105,161,.1);border-color:rgba(3,105,161,.3);transform:translateY(-2px)}
+.cert-badge{
+  width:44px;height:44px;min-width:44px;border-radius:10px;
+  background:rgba(3,105,161,.25);display:flex;align-items:center;justify-content:center;
+}
+.cert-badge svg{width:22px;height:22px;stroke:var(--blue-light)}
+.cert-body h4{font-family:'Poppins',sans-serif;font-size:.88rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.cert-body p{color:#64748B;font-size:.77rem;line-height:1.5}
+
+/* ── CHARITY ── */
+.charity-section{
+  background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));
+  border:1px solid rgba(245,158,11,.2);border-radius:16px;padding:2rem;margin-top:3rem;
+  display:flex;align-items:center;gap:2rem;
+}
+.charity-icon{font-size:2.5rem}
+.charity-body h3{font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:.4rem}
+.charity-body p{color:#94A3B8;font-size:.9rem;line-height:1.7}
+
+/* ── CONTACT ── */
+#contact{padding:5rem 2rem;background:var(--navy)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;margin-top:3rem}
+.contact-info h3{font-family:'Poppins',sans-serif;font-size:1.2rem;color:#fff;font-weight:700;margin-bottom:1.5rem}
+.contact-location{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:1.25rem;margin-bottom:1rem;
+}
+.contact-location h4{color:var(--blue-light);font-size:.85rem;font-weight:700;margin-bottom:.6rem;letter-spacing:.04em;text-transform:uppercase}
+.contact-location p{color:#94A3B8;font-size:.82rem;line-height:1.8}
+.contact-detail{display:flex;align-items:center;gap:.6rem;color:#94A3B8;font-size:.82rem;margin-top:.4rem}
+.contact-detail svg{width:14px;height:14px;stroke:var(--blue-light);min-width:14px}
+.contact-firm{
+  background:rgba(3,105,161,.08);border:1px solid rgba(3,105,161,.2);
+  border-radius:12px;padding:1.25rem;margin-top:1rem;
+}
+.contact-firm h4{color:var(--blue-light);font-size:.82rem;font-weight:700;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.04em}
+.contact-firm p{color:#64748B;font-size:.78rem;line-height:1.8}
+/* FORM */
+.contact-form{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:2rem;
+}
+.contact-form h3{font-family:'Poppins',sans-serif;font-size:1.2rem;color:#fff;font-weight:700;margin-bottom:.3rem}
+.contact-form p{color:#64748B;font-size:.85rem;margin-bottom:1.75rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;color:#94A3B8;font-size:.8rem;font-weight:600;margin-bottom:.4rem;letter-spacing:.03em}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:.75rem 1rem;color:#fff;font-family:'Open Sans',sans-serif;
+  font-size:.88rem;outline:none;transition:border-color .2s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);background:rgba(3,105,161,.08)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:#475569}
+.form-group select option{background:var(--navy2);color:#fff}
+.form-group textarea{resize:vertical;min-height:130px}
+.form-submit{
+  width:100%;background:var(--blue);color:#fff;padding:.9rem;border-radius:8px;
+  font-weight:700;font-size:.95rem;cursor:pointer;border:none;
+  transition:all .25s;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.form-submit:hover{background:#0284C7;transform:translateY(-1px);box-shadow:0 8px 25px rgba(3,105,161,.4)}
+.form-success{
+  display:none;text-align:center;padding:2rem;
+  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);
+  border-radius:12px;color:#6EE7B7;
+}
+
+/* ── FOOTER ── */
+footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);padding:3rem 2rem 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;max-width:1100px;margin:0 auto}
+.footer-brand p{color:#64748B;font-size:.82rem;line-height:1.7;margin-top:.75rem}
+.footer-col h4{font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:700;color:#fff;margin-bottom:1rem;letter-spacing:.04em;text-transform:uppercase}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.footer-col ul li a{color:#64748B;font-size:.82rem;cursor:pointer;transition:color .2s}
+.footer-col ul li a:hover{color:#fff}
+.footer-bottom{
+  max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.06);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;
+}
+.footer-bottom p{color:#334155;font-size:.75rem}
+.footer-badge{
+  background:rgba(3,105,161,.15);border:1px solid rgba(3,105,161,.25);
+  color:#7DD3FC;padding:.25rem .75rem;border-radius:99px;font-size:.72rem;font-weight:600;
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.visible{opacity:1;transform:none}
+
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── MOBILE NAV ── */
+@media(max-width:900px){
+  .nav-links{display:none;position:fixed;top:70px;left:0;right:0;background:var(--navy);padding:1.5rem;flex-direction:column;gap:1rem;border-bottom:1px solid rgba(255,255,255,.08);z-index:99}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .why-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .footer-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .hero-buttons{flex-direction:column;align-items:center}
+  .charity-section{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <img src="logo.png" class="nav-logo" alt="Best Account logo">
+    <div class="nav-brand-text">
+      <span>Best Account</span>
+      <small>Účetní & daňová kancelář</small>
+    </div>
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="goTo('about')" data-i18n="nav.about">O nás</a></li>
+    <li><a onclick="goTo('why')" data-i18n="nav.why">Proč k nám</a></li>
+    <li><a onclick="goTo('services')" data-i18n="nav.services">Služby</a></li>
+    <li><a onclick="goTo('team')" data-i18n="nav.team">Tým</a></li>
+    <li><a onclick="goTo('certs')" data-i18n="nav.certs">Certifikáty</a></li>
+    <li><a onclick="goTo('contact')" data-i18n="nav.contact">Kontakt</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="nav-langs">
+      <button class="active" onclick="setLang('cs')">CZ</button>
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('de')">DE</button>
+    </div>
+    <button class="nav-cta" onclick="goTo('contact')" data-i18n="nav.cta">Kontaktujte nás</button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span data-i18n="hero.badge">Člen Komory daňových poradců ČR · č. 5270</span>
+    </div>
+    <h1 class="hero-title" data-i18n-html="hero.title">
+      Váš spolehlivý<br>
+      <span class="accent">finanční partner</span>
+    </h1>
+    <p class="hero-subtitle" data-i18n="hero.subtitle">
+      Komplexní účetní a daňová kancelář ve Vítkově a Opavě. Osobní přístup, odbornost a diskrétnost od roku 2016.
+    </p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="goTo('contact')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+        <span data-i18n="hero.btn1">Bezplatná konzultace</span>
+      </button>
+      <button class="btn-outline" onclick="goTo('odklad')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        <span data-i18n="hero.btn2">Odklad daní</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-scroll" onclick="goTo('stats')">
+    <span>Zjistit více</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="200">0</div>
+      <div class="stat-label">spokojených klientů</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:.1s">
+      <div class="stat-num" data-target="8">0</div>
+      <div class="stat-label">let zkušeností</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:.2s">
+      <div class="stat-num" data-target="15">0</div>
+      <div class="stat-label">specialistů v týmu</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:.3s">
+      <div class="stat-num" data-target="3">0</div>
+      <div class="stat-label">jazyky (CZ/EN/DE)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ O NÁS ══ -->
+<section id="about" class="section section-dark">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">O nás</span>
+      <h2 class="section-title" style="color:#fff">Víc než jen čísla</h2>
+      <p class="section-sub">Klientům radíme jak při řešení běžných situací, tak nestandardních postupů. Provádíme kalkulaci daní během účetního období tak, aby bylo možno daňové povinnosti konkrétně řídit.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem">
+      <div class="cert-card reveal" style="transition-delay:.1s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+        <div class="cert-body"><h4>Maximální samostatnost</h4><p>Od prvopočátečního sběru dokladů přes automatické zasílání pravidelných reportů.</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.2s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+        <div class="cert-body"><h4>Pohotová reakce</h4><p>Maximální provázanost s procesy Vaší společnosti – účetní, daňové i ekonomické poradenství.</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.3s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+        <div class="cert-body"><h4>Dvě pobočky</h4><p>Centrála Vítkov + pobočka Opava. Dostupní pro klienty z celého regionu.</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.4s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="cert-body"><h4>Tři jazyky</h4><p>Komplexní ekonomická agenda v češtině, angličtině i němčině. Cizojazyčné překlady odborných textů.</p></div>
+      </div>
+    </div>
+
+    <ul style="list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.75rem;margin-top:2rem">
+      <li class="why-item reveal" style="transition-delay:.1s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div><p>Společnost nabízí zcela nový přístup vedení účetnictví a daňové evidence</p></li>
+      <li class="why-item reveal" style="transition-delay:.2s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div><p>Poskytuje daňové poradenské služby a odložení daňových přiznání</p></li>
+      <li class="why-item reveal" style="transition-delay:.3s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div><p>Profesionální zpracování všech typů daňových přiznání daňovým poradcem</p></li>
+      <li class="why-item reveal" style="transition-delay:.4s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div><p>Usiluje o sjednocení všech ekonomických a provozních činností</p></li>
+      <li class="why-item reveal" style="transition-delay:.5s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div><p>Provádíme analýzy a reporty o hospodaření Vaší firmy</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ PROČ K NÁM ══ -->
+<section id="why" class="section section-mid">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Proč k nám?</span>
+      <h2 class="section-title" style="color:#fff">Přednosti, které oceníte</h2>
+      <p class="section-sub">Hledáte poradce, kteří vám nabídnou osobní přístup a myslí v souvislostech? Jste na správném místě. Vaše daně děláme jako by byly naše.</p>
+    </div>
+    <div class="why-grid">
+      <ul class="why-list">
+        <li class="why-item reveal" style="transition-delay:.1s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><p>Jsme komplexní účetní a daňová kancelář – vše pod jednou střechou</p></li>
+        <li class="why-item reveal" style="transition-delay:.2s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg></div><p>Víme, kde a jak Vám ušetříme peníze – daňová optimalizace je naší prioritou</p></li>
+        <li class="why-item reveal" style="transition-delay:.3s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><p>Nalézat efektivitu tam kde není, je naším prvořadým cílem</p></li>
+        <li class="why-item reveal" style="transition-delay:.4s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><p>Rozbory a analýzy Vašeho hospodaření jsou naší předností</p></li>
+        <li class="why-item reveal" style="transition-delay:.5s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg></div><p>Flexibilní sběr účetních dokladů vedoucí k okamžité informovanosti</p></li>
+        <li class="why-item reveal" style="transition-delay:.6s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><p>Zastoupíme Vás v daňových řízeních – daňová kontrola, spory, opravné prostředky</p></li>
+        <li class="why-item reveal" style="transition-delay:.7s"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><p>Daňové poradenství pro Vás i Vašeho účetního – partnerská spolupráce</p></li>
+      </ul>
+      <div class="reveal-right" style="transition-delay:.2s">
+        <div class="why-visual">
+          <p class="why-visual-title">Oblasti našich služeb</p>
+          <div class="why-tag-cloud">
+            <span class="why-tag">Daně</span>
+            <span class="why-tag">Hospodářské reporty</span>
+            <span class="why-tag">Daňové evidence</span>
+            <span class="why-tag">Účetnictví</span>
+            <span class="why-tag">Analýzy</span>
+            <span class="why-tag">Ekonomika</span>
+            <span class="why-tag">Daňová optimalizace</span>
+            <span class="why-tag">Finanční úspora</span>
+            <span class="why-tag">Odklad daní</span>
+            <span class="why-tag">Daňový poradce</span>
+            <span class="why-tag">Mzdová agenda</span>
+            <span class="why-tag">Personalistika</span>
+            <span class="why-tag">Due Diligence</span>
+            <span class="why-tag">EET</span>
+            <span class="why-tag">ESF/MPSV</span>
+            <span class="why-tag">BOZP a PO</span>
+            <span class="why-tag">Překlady EN/DE</span>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem;background:rgba(3,105,161,.1);border:1px solid rgba(3,105,161,.2);border-radius:12px;padding:1.5rem">
+          <h4 style="font-family:'Poppins',sans-serif;color:#7DD3FC;font-size:.9rem;font-weight:700;margin-bottom:.75rem">E-Servis</h4>
+          <p style="color:#94A3B8;font-size:.85rem;line-height:1.7">Prostřednictvím on-line formuláře poskytujeme účetní, ekonomické a daňové poradenství včetně tvorby závazkových vztahů. Komunikujte s daňovou kanceláří vzdáleně – vyřešíme jakýkoliv Váš problém včas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ODKLAD DANÍ ══ -->
+<section id="odklad">
+  <div class="odklad-glow"></div>
+  <div class="odklad-card reveal">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:#FCD34D;padding:.35rem .9rem;border-radius:99px;font-size:.75rem;font-weight:700;letter-spacing:.06em;margin-bottom:1.25rem">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+      Důležité – termíny daní
+    </div>
+    <h2>Odklad <span>daní</span> bez starostí</h2>
+    <p>Povinnost podat daňové přiznání do konce března nemají jen podnikatelé – právnické osoby a živnostníci, ale také veškerá sdružení, nadace, veřejně prospěšné organizace a občané s vedlejšími příjmy.</p>
+    <p><strong style="color:#7DD3FC">Ti, co mají daňového poradce, mají tuto povinnost posunutou do 30. června.</strong></p>
+    <p>Zajistíme Vám odklad daně prostřednictvím daňového poradce. K tomu vše potřebné, včetně podání samotného daňového přiznání. Nejsme zprostředkovatelé.</p>
+    <div class="odklad-cta">
+      <button class="btn-primary" onclick="goTo('contact')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+        <span data-i18n="odklad.btn">Zajistěte si čas a klid – odložte placení daně</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SLUŽBY ══ -->
+<section id="services" class="section section-dark">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Služby</span>
+      <h2 class="section-title" style="color:#fff">Komplexní péče o Vaše finance</h2>
+      <p class="section-sub">Od vedení účetnictví přes daňové poradenství až po due diligence. Vše pod jednou střechou.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal" style="transition-delay:.05s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+        <h3 class="service-title">Daně</h3>
+        <p class="service-body">Kompletní daňové poradenství a zastupování před finančními úřady.</p>
+        <ul class="service-list">
+          <li>Daň z příjmu FO a PO</li>
+          <li>DPH, kontrolní hlášení</li>
+          <li>Daň z nemovitostí</li>
+          <li>Silniční daň</li>
+          <li>Ekologické a spotřební daně</li>
+          <li>EU – intrakomunitární obchod</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.1s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+        <h3 class="service-title">Vedení účetnictví</h3>
+        <p class="service-body">Zpracování účetních dokladů, hlavní knihy a celé účetní agendy.</p>
+        <ul class="service-list">
+          <li>Účetní deník a hlavní kniha</li>
+          <li>Kniha pohledávek a závazků</li>
+          <li>Záznamní povinnost k DPH</li>
+          <li>Účetní závěrka</li>
+          <li>Členění dle středisek, zakázek</li>
+          <li>Dálková správa dat</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.15s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3 class="service-title">Daňová evidence</h3>
+        <p class="service-body">Vlastní metoda zpracování daňové evidence dle platné legislativy.</p>
+        <ul class="service-list">
+          <li>Pokladní kniha a bankovní účty</li>
+          <li>Peněžní deník</li>
+          <li>Kniha pohledávek a závazků</li>
+          <li>Karty dlouhodobého majetku</li>
+          <li>Účetní závěrka DE</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.2s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3 class="service-title">Mzdová agenda</h3>
+        <p class="service-body">Kompletní zpracování mezd a personální agendy.</p>
+        <ul class="service-list">
+          <li>Kompletní zpracování mezd</li>
+          <li>Přehledy pro ČSSZ a ZP</li>
+          <li>Roční zúčtování daně z příjmu</li>
+          <li>Zastupování při kontrolách</li>
+          <li>Mzdové reporty a analýzy</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.25s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3 class="service-title">Personalistika</h3>
+        <p class="service-body">Kompletní personální agenda vaší společnosti.</p>
+        <ul class="service-list">
+          <li>Pracovní smlouvy a dohody</li>
+          <li>Mzdové výměry a náplně</li>
+          <li>Osobní listy zaměstnanců</li>
+          <li>BOZP a PO školení</li>
+          <li>Pomoc při náboru</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.3s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+        <h3 class="service-title">Cizojazyčná agenda</h3>
+        <p class="service-body">Ekonomická agenda a překlady v angličtině a němčině.</p>
+        <ul class="service-list">
+          <li>Překlady AJ–CZ, CZ–AJ</li>
+          <li>Překlady NJ–CZ, CZ–NJ</li>
+          <li>Odborné smluvní dokumenty</li>
+          <li>Obchodní a pracovní smlouvy</li>
+          <li>Logistika, marketing, management</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.35s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="service-title">Due Diligence</h3>
+        <p class="service-body">Finanční prověrka při akvizicích a koupi společností.</p>
+        <ul class="service-list">
+          <li>Prověření účetních metod</li>
+          <li>Finanční analýza</li>
+          <li>Rozbor EBITDA</li>
+          <li>Analýza pracovního kapitálu</li>
+          <li>Identifikace daňových rizik</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.4s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <h3 class="service-title">EET</h3>
+        <p class="service-body">Kompletní servis v oblasti elektronické evidence tržeb.</p>
+        <ul class="service-list">
+          <li>Legislativní zastřešení EET</li>
+          <li>Autentizační certifikát</li>
+          <li>Komunikace s FÚ</li>
+          <li>Technické řešení a nákup zařízení</li>
+          <li>Implementace aplikací</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.45s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <h3 class="service-title">ESF / MPSV</h3>
+        <p class="service-body">Poradenství a zpracování v oblasti evropských sociálních fondů a MPSV.</p>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.5s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 17H2a3 3 0 000 6h20a3 3 0 000-6zM6 17V3a1 1 0 011-1h10a1 1 0 011 1v14"/></svg></div>
+        <h3 class="service-title">Účetnictví pro cizince</h3>
+        <p class="service-body">Specializované vedení účetnictví pro zahraniční klienty a menšiny.</p>
+        <ul class="service-list">
+          <li>Záznamní povinnost k DPH</li>
+          <li>Účetní závěrka</li>
+          <li>Vnitropodnikové směrnice</li>
+          <li>Dálková správa dat</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.55s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17H7A5 5 0 017 7h2M15 7h2a5 5 0 010 10h-2M8 12h8"/></svg></div>
+        <h3 class="service-title">Daň silniční</h3>
+        <p class="service-body">Správa firemního autoparku a silniční daně.</p>
+        <ul class="service-list">
+          <li>Daňově uznatelné náklady PHM</li>
+          <li>Správa firemního autoparku</li>
+          <li>Evidence a kniha jízd</li>
+          <li>Přiznání k dani silniční</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:.6s">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3 class="service-title">Školení & Semináře</h3>
+        <p class="service-body">Odborná školení a semináře v oblasti účetnictví, daní a pracovního práva pro firemní klientelu.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TÝM ══ -->
+<section id="team" class="section section-mid">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Náš tým</span>
+      <h2 class="section-title" style="color:#fff">Odborníci, na které se můžete spolehnout</h2>
+      <p class="section-sub">Zkušený kolektiv specialistů s rozsáhlou praxí v účetnictví, daních i mzdové agendě.</p>
+    </div>
+
+    <div style="margin-top:2.5rem">
+      <h3 style="color:#7DD3FC;font-family:'Poppins',sans-serif;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem">Vedení společnosti</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem">
+        <div class="team-card reveal" style="transition-delay:.1s;border-color:rgba(3,105,161,.35)">
+          <div class="team-avatar" style="border-color:rgba(245,158,11,.5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="team-name">Ing. Ivo Tirol</div>
+          <div class="team-role">Výkonný ředitel, ekonom</div>
+          <div class="team-email">office@bestaccount.cz</div>
+        </div>
+        <div class="team-card reveal" style="transition-delay:.15s;border-color:rgba(3,105,161,.35)">
+          <div class="team-avatar" style="border-color:rgba(245,158,11,.5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="team-name">Ing. Tereza Tirolová</div>
+          <div class="team-role">Jednatelka · Daňová poradkyně KDP ČR č. 5270</div>
+          <div class="team-email">office@bestaccount.cz</div>
+        </div>
+        <div class="team-card reveal" style="transition-delay:.2s">
+          <div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="team-name">Ing. Martin Coufal</div>
+          <div class="team-role">Externí auditor · Daňový poradce č. 1721</div>
+        </div>
+        <div class="team-card reveal" style="transition-delay:.25s">
+          <div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="team-name">Ing. Aleš Coufal</div>
+          <div class="team-role">Externí daňový poradce č. 4561</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem">
+      <h3 style="color:#7DD3FC;font-family:'Poppins',sans-serif;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem">Senior tým</h3>
+      <div class="team-grid">
+        <div class="team-card reveal" style="transition-delay:.1s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Jana Pichoňská</div><div class="team-role">Asistentka vedení</div><div class="team-email">sekretariat@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.15s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Šimon Tirol</div><div class="team-role">Senior účetní · Správce SW</div><div class="team-email">admin@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.2s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Bc. Zuzana Schabjuková</div><div class="team-role">Senior účetní</div><div class="team-email">fakturace@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.25s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Petr Zbedina</div><div class="team-role">Senior účetní</div><div class="team-email">petr.zbedina@bestaccount.cz</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem">
+      <h3 style="color:#7DD3FC;font-family:'Poppins',sans-serif;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem">Účetní tým</h3>
+      <div class="team-grid">
+        <div class="team-card reveal" style="transition-delay:.05s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Michal Bek</div><div class="team-role">Účetní</div><div class="team-email">opava@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.1s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Marek Hořín</div><div class="team-role">Účetní</div><div class="team-email">fakturace@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.15s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Ing. Martina Draisaitlová</div><div class="team-role">Účetní</div><div class="team-email">martina.draisaitlova@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.2s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Andrea Vojtěchová</div><div class="team-role">Účetní</div><div class="team-email">fakturace@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.25s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Josef Bajer</div><div class="team-role">Účetní</div><div class="team-email">fakturace@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.3s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Sandra Orlíková</div><div class="team-role">Účetní</div><div class="team-email">opava@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.35s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Ing. Lucie Neuwirthová</div><div class="team-role">Účetní</div><div class="team-email">lucie.neuwirthova@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.4s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Ing. Radomír Wisnar</div><div class="team-role">Účetní</div><div class="team-email">radomir.wisnar@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.45s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Eva Slámová</div><div class="team-role">Administrativa</div><div class="team-email">fakturace@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.5s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Anna Dusková</div><div class="team-role">Administrativní výpomoc</div><div class="team-email">fakturace@bestaccount.cz</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem">
+      <h3 style="color:#7DD3FC;font-family:'Poppins',sans-serif;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem">Mzdové účetní</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem">
+        <div class="team-card reveal"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Barbora Nekorancová</div><div class="team-role">Mzdová účetní</div><div class="team-email">personalistika@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.1s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Ing. Vladimíra Šimečková</div><div class="team-role">Mzdová účetní</div><div class="team-email">mzdy@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.2s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="team-name">Hana Mičanová</div><div class="team-role">Mzdová účetní</div><div class="team-email">hana.micanova@bestaccount.cz</div></div>
+        <div class="team-card reveal" style="transition-delay:.3s"><div class="team-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="team-name">Dáša Vandasová</div><div class="team-role">BOZP a PO, OŽP, RTZZ · Komora BOZP a PO ČR</div><div class="team-email">dasa.vandasova@gmail.com</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CERTIFIKÁTY ══ -->
+<section id="certs" class="section section-dark">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Certifikáty & oprávnění</span>
+      <h2 class="section-title" style="color:#fff">Ověřená odbornost</h2>
+      <p class="section-sub">Naše tým disponuje certifikáty a oprávněními vydanými předními odborné institucemi. Jsme Prověřená společnost.</p>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card reveal" style="transition-delay:.1s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="cert-body"><h4>Osvědčení – Daňový poradce</h4><p>Ing. Tereza Tirolová, KDP ČR č. 5270 · Oprávnění dle zákona č. 523/1992 Sb.</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.15s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="cert-body"><h4>Osvědčení – Auditor</h4><p>Ing. Martin Coufal · Komora auditorů ČR č. 1721</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.2s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+        <div class="cert-body"><h4>Osvědčení o evidenci PO – CFE</h4><p>Best Account s.r.o. · IČ 05067014 · Datum zaevidování 1. 2. 2018</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.25s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="cert-body"><h4>Etický kodex KDP ČR</h4><p>Best Account s.r.o. · Přidržuje se Etického kodexu Komory daňových poradců ČR</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.3s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+        <div class="cert-body"><h4>Rekvalifikace – Daňový specialista</h4><p>Ing. Tereza Tirolová · KDP ČR Brno · 140 hodin teorie · 2016</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.35s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="cert-body"><h4>VŠE Praha – Vyšší účetnictví</h4><p>Ing. Tereza Lichovníková · Fakulta financí a účetnictví · Evidenční číslo 5270</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.4s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="cert-body"><h4>Certifikát – Transferové ceny</h4><p>Ing. Tereza Tirolová · Wolters Kluwer ČR · Webinář pro manažery · 28. 1. 2026</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.45s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="cert-body"><h4>Certifikát – Holdingové struktury</h4><p>Ing. Tereza Tirolová · Wolters Kluwer ČR · Konference · 15. 5. 2025</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.5s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <div class="cert-body"><h4>Prověřená společnost 2025</h4><p>Best Account s.r.o. · Certifikát za absolvování podnikatelských studií a seminářů</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.55s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div class="cert-body"><h4>Certifikát Dobrého anděla</h4><p>Ing. Tereza Tirolová, Best Account s.r.o. · Dobrý anděl od 10. 5. 2025</p></div>
+      </div>
+      <div class="cert-card reveal" style="transition-delay:.6s">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg></div>
+        <div class="cert-body"><h4>Seminář BOVA – Rozdělení kapitálu</h4><p>Ing. Tereza Tirolová · Právní a daňové souvislosti · 9. 3. 2026</p></div>
+      </div>
+    </div>
+
+    <!-- CHARITY -->
+    <div class="charity-section reveal" style="margin-top:3rem">
+      <div class="charity-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div class="charity-body">
+        <h3>Jsme hrdými Dobrými anděly!</h3>
+        <p>Pravidelně přispíváme Charitě Česká republika a jsme Dobrými anděly – pomáháme těm, kteří to potřebují. Pomáháme rodinám, které se ocitly v těžké životní situaci vlivem vážného onemocnění.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ KONTAKT ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Kontakt</span>
+      <h2 class="section-title" style="color:#fff" data-i18n="contact.heading">Spojte se s námi</h2>
+      <p class="section-sub" style="color:#94A3B8" data-i18n="contact.sub">Rádi Vám poradíme. Ozvěte se telefonicky, e-mailem nebo přes náš kontaktní formulář.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <h3>Naše pobočky</h3>
+
+        <div class="contact-location">
+          <h4>Centrála Vítkov</h4>
+          <p>Wolkerova 1009, Vítkov, 749 01</p>
+          <p>Otevírací doba: po–pá 8–16h</p>
+          <div class="contact-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>+420 721 075 783</div>
+          <div class="contact-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>office@bestaccount.cz</div>
+        </div>
+
+        <div class="contact-location">
+          <h4>Pobočka Opava</h4>
+          <p>U Pošty 250/6, Opava, 746 01</p>
+          <p>Otevírací doba: po–pá 8–16h</p>
+          <div class="contact-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>+420 725 423 579</div>
+          <div class="contact-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>opava@bestaccount.cz</div>
+        </div>
+
+        <div class="contact-firm">
+          <h4>Firemní údaje</h4>
+          <p><strong style="color:#94A3B8">Best Account s.r.o.</strong></p>
+          <p>Komenského 152, 749 01 Vítkov</p>
+          <p>IČ: 05067014 · DIČ: CZ05067014</p>
+          <p>Bankovní účet: 9338116001/5500</p>
+          <p>Datová schránka: thrvd6r</p>
+          <p style="margin-top:.5rem;font-size:.73rem;color:#475569">Zapsána u Krajského soudu v Ostravě, oddíl C, vložka 66124</p>
+        </div>
+      </div>
+
+      <div class="contact-form reveal-right">
+        <h3>Napište nám</h3>
+        <p>Bezplatná konzultace nebo dotaz? Ozveme se co nejdříve.</p>
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Jméno a příjmení *</label>
+              <input type="text" id="fname" placeholder="Jan Novák" required>
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" placeholder="jan@firma.cz" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Telefon</label>
+              <input type="tel" id="phone" placeholder="+420 xxx xxx xxx">
+            </div>
+            <div class="form-group">
+              <label for="service">Zájem o službu</label>
+              <select id="service">
+                <option value="">Vyberte službu...</option>
+                <option>Daňové poradenství</option>
+                <option>Vedení účetnictví</option>
+                <option>Mzdová agenda</option>
+                <option>Odklad daní</option>
+                <option>Personalistika</option>
+                <option>Due Diligence</option>
+                <option>Cizojazyčná agenda</option>
+                <option>Jiné</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">Předmět *</label>
+            <input type="text" id="subject" placeholder="Stručný popis Vašeho dotazu" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Zpráva *</label>
+            <textarea id="message" placeholder="Popište Váš požadavek..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9 22,2"/></svg>
+            Odeslat zprávu
+          </button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom:.75rem"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+          <h4 style="color:#6EE7B7;font-family:'Poppins',sans-serif;margin-bottom:.5rem">Zpráva odeslána!</h4>
+          <p style="color:#94A3B8;font-size:.85rem">Ozveme se Vám co nejdříve. Děkujeme za zájem o naše služby.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-brand">
+        <img src="logo.png" style="width:36px;height:40px;object-fit:contain" alt="Best Account logo">
+        <div class="nav-brand-text"><span>Best Account</span><small data-i18n="brand.tagline">Účetní & daňová kancelář</small></div>
+      </div>
+      <p style="margin-top:1rem">Komplexní účetní, daňové a ekonomické poradenství. Člen Komory daňových poradců ČR. Dvě pobočky – Vítkov a Opava.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigace</h4>
+      <ul>
+        <li><a onclick="goTo('about')">O nás</a></li>
+        <li><a onclick="goTo('why')">Proč k nám</a></li>
+        <li><a onclick="goTo('services')">Služby</a></li>
+        <li><a onclick="goTo('team')">Tým</a></li>
+        <li><a onclick="goTo('certs')">Certifikáty</a></li>
+        <li><a onclick="goTo('contact')">Kontakt</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Služby</h4>
+      <ul>
+        <li><a>Daně</a></li>
+        <li><a>Účetnictví</a></li>
+        <li><a>Mzdová agenda</a></li>
+        <li><a>Personalistika</a></li>
+        <li><a>Due Diligence</a></li>
+        <li><a>Odklad daní</a></li>
+        <li><a>Školení</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a>office@bestaccount.cz</a></li>
+        <li><a>+420 721 075 783</a></li>
+        <li><a>Wolkerova 1009, Vítkov</a></li>
+        <li><a>U Pošty 250/6, Opava</a></li>
+        <li style="margin-top:.5rem"><a>IČ: 05067014</a></li>
+        <li><a>DIČ: CZ05067014</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Best Account s.r.o. Všechna práva vyhrazena.</p>
+    <span class="footer-badge">Člen KDP ČR · Prověřená společnost 2025</span>
+  </div>
+</footer>
+
+<script>
+// ── TRANSLATIONS ──
+const T = {
+  cs: {
+    'brand.tagline': 'Účetní & daňová kancelář',
+    'nav.about': 'O nás', 'nav.why': 'Proč k nám', 'nav.services': 'Služby',
+    'nav.team': 'Tým', 'nav.certs': 'Certifikáty', 'nav.contact': 'Kontakt',
+    'nav.cta': 'Kontaktujte nás',
+    'hero.badge': 'Člen Komory daňových poradců ČR · č. 5270',
+    'hero.title': 'Váš spolehlivý<br><span class="accent">finanční partner</span>',
+    'hero.subtitle': 'Komplexní účetní a daňová kancelář ve Vítkově a Opavě. Osobní přístup, odbornost a diskrétnost od roku 2016.',
+    'hero.btn1': 'Bezplatná konzultace', 'hero.btn2': 'Odklad daní',
+    'stats.clients': 'spokojených klientů', 'stats.years': 'let zkušeností',
+    'stats.team': 'specialistů v týmu', 'stats.langs': 'jazyky (CZ/EN/DE)',
+    'form.name': 'Jméno a příjmení *', 'form.email': 'E-mail *',
+    'form.phone': 'Telefon', 'form.service': 'Zájem o službu',
+    'form.subject': 'Předmět *', 'form.message': 'Zpráva *',
+    'form.submit': 'Odeslat zprávu',
+    'form.heading': 'Napište nám',
+    'form.subheading': 'Bezplatná konzultace nebo dotaz? Ozveme se co nejdříve.',
+    'form.success.title': 'Zpráva odeslána!',
+    'form.success.text': 'Ozveme se Vám co nejdříve. Děkujeme za zájem o naše služby.',
+    'contact.heading': 'Spojte se s námi',
+    'contact.sub': 'Rádi Vám poradíme. Ozvěte se telefonicky, e-mailem nebo přes náš kontaktní formulář.',
+    'footer.tagline': 'Komplexní účetní, daňové a ekonomické poradenství. Člen Komory daňových poradců ČR. Dvě pobočky – Vítkov a Opava.',
+    'odklad.badge': 'Důležité – termíny daní',
+    'odklad.btn': 'Zajistěte si čas a klid – odložte placení daně',
+    'scroll.more': 'Zjistit více'
+  },
+  en: {
+    'brand.tagline': 'Accounting & Tax Office',
+    'nav.about': 'About Us', 'nav.why': 'Why Us', 'nav.services': 'Services',
+    'nav.team': 'Team', 'nav.certs': 'Certificates', 'nav.contact': 'Contact',
+    'nav.cta': 'Contact Us',
+    'hero.badge': 'Member of the Chamber of Tax Advisors · No. 5270',
+    'hero.title': 'Your reliable<br><span class="accent">financial partner</span>',
+    'hero.subtitle': 'Comprehensive accounting and tax office in Vítkov and Opava. Personal approach, expertise and discretion since 2016.',
+    'hero.btn1': 'Free Consultation', 'hero.btn2': 'Tax Deferral',
+    'stats.clients': 'satisfied clients', 'stats.years': 'years of experience',
+    'stats.team': 'specialists in team', 'stats.langs': 'languages (CZ/EN/DE)',
+    'form.name': 'Full Name *', 'form.email': 'Email *',
+    'form.phone': 'Phone', 'form.service': 'Service of interest',
+    'form.subject': 'Subject *', 'form.message': 'Message *',
+    'form.submit': 'Send Message',
+    'form.heading': 'Write to Us',
+    'form.subheading': 'Free consultation or a question? We will get back to you as soon as possible.',
+    'form.success.title': 'Message sent!',
+    'form.success.text': 'We will contact you shortly. Thank you for your interest in our services.',
+    'contact.heading': 'Get in Touch',
+    'contact.sub': 'We are happy to advise you. Contact us by phone, email or through our contact form.',
+    'footer.tagline': 'Comprehensive accounting, tax and economic advisory. Member of the Chamber of Tax Advisors. Two offices – Vítkov and Opava.',
+    'odklad.badge': 'Important – tax deadlines',
+    'odklad.btn': 'Secure your time and peace – defer your tax payment',
+    'scroll.more': 'Learn more'
+  },
+  de: {
+    'brand.tagline': 'Buchhaltungs- & Steuerkanzlei',
+    'nav.about': 'Über uns', 'nav.why': 'Warum wir', 'nav.services': 'Leistungen',
+    'nav.team': 'Team', 'nav.certs': 'Zertifikate', 'nav.contact': 'Kontakt',
+    'nav.cta': 'Kontakt aufnehmen',
+    'hero.badge': 'Mitglied der Kammer der Steuerberater · Nr. 5270',
+    'hero.title': 'Ihr zuverlässiger<br><span class="accent">Finanzpartner</span>',
+    'hero.subtitle': 'Umfassende Buchhaltungs- und Steuerkanzlei in Vítkov und Opava. Persönlicher Ansatz, Fachkenntnis und Diskretion seit 2016.',
+    'hero.btn1': 'Kostenlose Beratung', 'hero.btn2': 'Steueraufschub',
+    'stats.clients': 'zufriedene Klienten', 'stats.years': 'Jahre Erfahrung',
+    'stats.team': 'Spezialisten im Team', 'stats.langs': 'Sprachen (CZ/EN/DE)',
+    'form.name': 'Vor- und Nachname *', 'form.email': 'E-Mail *',
+    'form.phone': 'Telefon', 'form.service': 'Gewünschte Leistung',
+    'form.subject': 'Betreff *', 'form.message': 'Nachricht *',
+    'form.submit': 'Nachricht senden',
+    'form.heading': 'Schreiben Sie uns',
+    'form.subheading': 'Kostenlose Beratung oder eine Frage? Wir melden uns so schnell wie möglich.',
+    'form.success.title': 'Nachricht gesendet!',
+    'form.success.text': 'Wir werden uns in Kürze bei Ihnen melden. Vielen Dank für Ihr Interesse.',
+    'contact.heading': 'Kontaktieren Sie uns',
+    'contact.sub': 'Wir beraten Sie gerne. Kontaktieren Sie uns telefonisch, per E-Mail oder über unser Kontaktformular.',
+    'footer.tagline': 'Umfassende Buchhaltungs-, Steuer- und Wirtschaftsberatung. Mitglied der Kammer der Steuerberater. Zwei Standorte – Vítkov und Opava.',
+    'odklad.badge': 'Wichtig – Steuerfristen',
+    'odklad.btn': 'Sichern Sie sich Zeit und Ruhe – verschieben Sie Ihre Steuerzahlung',
+    'scroll.more': 'Mehr erfahren'
+  }
+};
+
+let currentLang = 'cs';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  document.documentElement.lang = lang === 'cs' ? 'cs' : lang;
+
+  // Update lang buttons
+  document.querySelectorAll('.nav-langs button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === (lang === 'cs' ? 'cz' : lang));
+  });
+
+  // Text elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // HTML elements (hero title etc.)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Stats labels
+  const statLabels = document.querySelectorAll('.stat-label');
+  if (statLabels[0]) statLabels[0].textContent = t['stats.clients'];
+  if (statLabels[1]) statLabels[1].textContent = t['stats.years'];
+  if (statLabels[2]) statLabels[2].textContent = t['stats.team'];
+  if (statLabels[3]) statLabels[3].textContent = t['stats.langs'];
+
+  // Form labels & placeholders
+  const fl = document.querySelectorAll('.form-group label');
+  const fkeys = ['form.name','form.email','form.phone','form.service','form.subject','form.message'];
+  fl.forEach((el,i) => { if(fkeys[i] && t[fkeys[i]]) el.textContent = t[fkeys[i]]; });
+
+  const fh = document.querySelector('.contact-form h3');
+  const fs = document.querySelector('.contact-form > p');
+  if(fh) fh.textContent = t['form.heading'];
+  if(fs) fs.textContent = t['form.subheading'];
+
+  const submitBtn = document.querySelector('.form-submit span') || document.querySelector('.form-submit');
+  if(submitBtn) submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9 22,2"/></svg> ${t['form.submit']}`;
+
+  const ch = document.querySelector('#contact .section-title');
+  const cs2 = document.querySelector('#contact .section-sub');
+  if(ch) ch.textContent = t['contact.heading'];
+  if(cs2) cs2.textContent = t['contact.sub'];
+
+  // Scroll hint
+  const scrollSpan = document.querySelector('.hero-scroll span');
+  if(scrollSpan) scrollSpan.textContent = t['scroll.more'];
+
+  // Odklad badge
+  const ob = document.querySelector('.odklad-card .hero-badge span, .odklad-card [style*="FCD34D"] span');
+  if(ob) ob.textContent = t['odklad.badge'];
+  const obBtn = document.querySelector('.odklad-cta .btn-primary span');
+  if(obBtn) obBtn.textContent = t['odklad.btn'];
+
+  // Footer tagline
+  const ftag = document.querySelector('.footer-brand > p');
+  if(ftag) ftag.textContent = t['footer.tagline'];
+}
+
+// ── NAVIGATION ──
+function goTo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const offset = 70;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+// ── HAMBURGER ──
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ── SCROLL REVEAL ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => revealObserver.observe(el));
+
+// ── COUNTER ANIMATION ──
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = +el.dataset.target;
+    const suffix = target > 50 ? '+' : '';
+    let count = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      count = Math.min(count + step, target);
+      el.textContent = Math.ceil(count) + suffix;
+      if (count >= target) clearInterval(timer);
+    }, 20);
+    countObserver.unobserve(el);
+  });
+}, { threshold: .5 });
+document.querySelectorAll('.stat-num[data-target]').forEach(el => countObserver.observe(el));
+
+// ── PARTICLES ──
+(() => {
+  const container = document.getElementById('particles');
+  const colors = ['#0369A1', '#0EA5E9', '#38BDF8', '#7DD3FC'];
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'hero-particle';
+    const size = Math.random() * 6 + 3;
+    Object.assign(p.style, {
+      width: size + 'px', height: size + 'px',
+      background: colors[Math.floor(Math.random() * colors.length)],
+      left: Math.random() * 100 + '%',
+      bottom: '-10px',
+      animationDuration: (Math.random() * 15 + 10) + 's',
+      animationDelay: (Math.random() * 10) + 's',
+    });
+    container.appendChild(p);
+  }
+})();
+
+// ── FORM ──
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contactForm').style.display = 'none';
+  const s = document.getElementById('formSuccess');
+  s.style.display = 'block';
+  const t = T[currentLang];
+  s.querySelector('h4').textContent = t['form.success.title'];
+  s.querySelector('p').textContent = t['form.success.text'];
+}
+
+// ── NAVBAR SCROLL EFFECT ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').style.background =
+    window.scrollY > 50 ? 'rgba(15,23,42,1)' : 'rgba(15,23,42,0.95)';
+});
+
+// ── BRAND CLICK → SCROLL TO TOP ──
+document.querySelector('.nav-brand').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
