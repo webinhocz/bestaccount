@@ -395,9 +395,15 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);paddin
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* ── MOBILE NAV ── */
+/* Hide mobile-only items by default (desktop) */
+.nav-links .mobile-langs{display:none}
+.nav-links .mobile-nav-cta{display:none}
+
 @media(max-width:900px){
   .nav-links{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(12,24,41,.98);padding:1.25rem 1.5rem;flex-direction:column;gap:.75rem;border-bottom:1px solid rgba(255,255,255,.07);z-index:99}
   .nav-links.open{display:flex}
+  .nav-links.open .mobile-langs{display:flex;gap:.5rem;padding-top:.25rem}
+  .nav-links.open .mobile-nav-cta{display:block}
   .nav-links a{font-size:.95rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
   .hamburger{display:flex}
   .why-grid{grid-template-columns:1fr}
@@ -489,7 +495,7 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);paddin
       <button onclick="setLang('en')" id="mlEN">EN</button>
       <button onclick="setLang('de')" id="mlDE">DE</button>
     </li>
-    <li style="margin-top:.25rem"><button class="nav-cta" style="width:100%" onclick="goTo('contact')" data-i18n="nav.cta">Kontaktujte nás</button></li>
+    <li class="mobile-nav-cta" style="margin-top:.25rem"><button class="nav-cta" style="width:100%" onclick="goTo('contact')" data-i18n="nav.cta">Kontaktujte nás</button></li>
   </ul>
 
   <div class="nav-right">
@@ -1131,8 +1137,46 @@ const T = {
     'hero.title': 'Váš spolehlivý<br><span class="accent">finanční partner</span>',
     'hero.subtitle': 'Komplexní účetní a daňová kancelář ve Vítkově a Opavě. Osobní přístup, odbornost a diskrétnost od roku 2016.',
     'hero.btn1': 'Bezplatná konzultace', 'hero.btn2': 'Odklad daní',
+    'scroll.more': 'Zjistit více',
     'stats.clients': 'spokojených klientů', 'stats.years': 'let zkušeností',
     'stats.team': 'specialistů v týmu', 'stats.langs': 'jazyky (CZ/EN/DE)',
+    'section.about.tag': 'O nás',
+    'section.about.title': 'Víc než jen čísla',
+    'section.about.sub': 'Klientům radíme jak při řešení běžných situací, tak nestandardních postupů. Provádíme kalkulaci daní během účetního období tak, aby bylo možno daňové povinnosti konkrétně řídit.',
+    'about.1.title': 'Maximální samostatnost', 'about.2.title': 'Pohotová reakce',
+    'about.3.title': 'Dvě pobočky', 'about.4.title': 'Tři jazyky',
+    'section.why.tag': 'Proč k nám?',
+    'section.why.title': 'Přednosti, které oceníte',
+    'section.why.sub': 'Hledáte poradce, kteří vám nabídnou osobní přístup a myslí v souvislostech? Jste na správném místě. Vaše daně děláme jako by byly naše.',
+    'why.visual.title': 'Oblasti našich služeb',
+    'odklad.title': 'Odklad <span>daní</span> bez starostí',
+    'odklad.p1': 'Povinnost podat daňové přiznání do konce března nemají jen podnikatelé – právnické osoby a živnostníci, ale také veškerá sdružení, nadace, veřejně prospěšné organizace a občané s vedlejšími příjmy.',
+    'odklad.p2': 'Ti, co mají daňového poradce, mají tuto povinnost posunutou do 30. června.',
+    'odklad.p3': 'Zajistíme Vám odklad daně prostřednictvím daňového poradce. K tomu vše potřebné, včetně podání samotného daňového přiznání. Nejsme zprostředkovatelé.',
+    'odklad.badge': 'Důležité – termíny daní',
+    'odklad.btn': 'Zajistěte si čas a klid – odložte placení daně',
+    'section.services.tag': 'Služby',
+    'section.services.title': 'Komplexní péče o Vaše finance',
+    'section.services.sub': 'Od vedení účetnictví přes daňové poradenství až po due diligence. Vše pod jednou střechou.',
+    'service.1.title': 'Daně', 'service.2.title': 'Vedení účetnictví', 'service.3.title': 'Daňová evidence',
+    'service.4.title': 'Mzdová agenda', 'service.5.title': 'Personalistika', 'service.6.title': 'Cizojazyčná agenda',
+    'service.7.title': 'Due Diligence', 'service.8.title': 'EET', 'service.9.title': 'ESF / MPSV',
+    'service.10.title': 'Účetnictví pro cizince', 'service.11.title': 'Daň silniční', 'service.12.title': 'Školení & Semináře',
+    'section.team.tag': 'Náš tým',
+    'section.team.title': 'Odborníci, na které se můžete spolehnout',
+    'section.team.sub': 'Zkušený kolektiv specialistů s rozsáhlou praxí v účetnictví, daních i mzdové agendě.',
+    'team.management': 'Vedení společnosti', 'team.senior': 'Senior tým',
+    'team.accounting': 'Účetní tým', 'team.payroll': 'Mzdové účetní',
+    'section.certs.tag': 'Certifikáty & oprávnění',
+    'section.certs.title': 'Ověřená odbornost',
+    'section.certs.sub': 'Naše tým disponuje certifikáty a oprávněními vydanými předními odbornými institucemi. Jsme Prověřená společnost.',
+    'charity.title': 'Jsme hrdými Dobrými anděly!',
+    'charity.text': 'Pravidelně přispíváme Charitě Česká republika a jsme Dobrými anděly – pomáháme těm, kteří to potřebují. Pomáháme rodinám, které se ocitly v těžké životní situaci vlivem vážného onemocnění.',
+    'contact.heading': 'Spojte se s námi',
+    'contact.sub': 'Rádi Vám poradíme. Ozvěte se telefonicky, e-mailem nebo přes náš kontaktní formulář.',
+    'contact.branches': 'Naše pobočky',
+    'contact.hq': 'Centrála Vítkov', 'contact.branch': 'Pobočka Opava',
+    'contact.firm.heading': 'Firemní údaje',
     'form.name': 'Jméno a příjmení *', 'form.email': 'E-mail *',
     'form.phone': 'Telefon', 'form.service': 'Zájem o službu',
     'form.subject': 'Předmět *', 'form.message': 'Zpráva *',
@@ -1141,12 +1185,9 @@ const T = {
     'form.subheading': 'Bezplatná konzultace nebo dotaz? Ozveme se co nejdříve.',
     'form.success.title': 'Zpráva odeslána!',
     'form.success.text': 'Ozveme se Vám co nejdříve. Děkujeme za zájem o naše služby.',
-    'contact.heading': 'Spojte se s námi',
-    'contact.sub': 'Rádi Vám poradíme. Ozvěte se telefonicky, e-mailem nebo přes náš kontaktní formulář.',
     'footer.tagline': 'Komplexní účetní, daňové a ekonomické poradenství. Člen Komory daňových poradců ČR. Dvě pobočky – Vítkov a Opava.',
-    'odklad.badge': 'Důležité – termíny daní',
-    'odklad.btn': 'Zajistěte si čas a klid – odložte placení daně',
-    'scroll.more': 'Zjistit více'
+    'footer.copyright': '© 2024 Best Account s.r.o. Všechna práva vyhrazena.',
+    'footer.badge': 'Člen KDP ČR · Prověřená společnost 2025'
   },
   en: {
     'brand.tagline': 'Accounting & Tax Office',
@@ -1157,8 +1198,46 @@ const T = {
     'hero.title': 'Your reliable<br><span class="accent">financial partner</span>',
     'hero.subtitle': 'Comprehensive accounting and tax office in Vítkov and Opava. Personal approach, expertise and discretion since 2016.',
     'hero.btn1': 'Free Consultation', 'hero.btn2': 'Tax Deferral',
+    'scroll.more': 'Learn more',
     'stats.clients': 'satisfied clients', 'stats.years': 'years of experience',
     'stats.team': 'specialists in team', 'stats.langs': 'languages (CZ/EN/DE)',
+    'section.about.tag': 'About Us',
+    'section.about.title': 'More than just numbers',
+    'section.about.sub': 'We advise clients on both standard and non-standard procedures. We calculate taxes during the accounting period so that tax obligations can be specifically managed.',
+    'about.1.title': 'Maximum Independence', 'about.2.title': 'Quick Response',
+    'about.3.title': 'Two Branches', 'about.4.title': 'Three Languages',
+    'section.why.tag': 'Why Us?',
+    'section.why.title': 'Advantages you will appreciate',
+    'section.why.sub': 'Looking for advisors who offer a personal approach and think holistically? You are in the right place. We treat your taxes as if they were our own.',
+    'why.visual.title': 'Our Service Areas',
+    'odklad.title': 'Tax Deferral <span>Without Worries</span>',
+    'odklad.p1': 'The obligation to file a tax return by the end of March applies not only to entrepreneurs – legal entities and sole traders – but also to all associations, foundations, non-profit organisations and citizens with secondary income.',
+    'odklad.p2': 'Those who have a tax advisor have this obligation extended to 30 June.',
+    'odklad.p3': 'We will arrange a tax deferral through a tax advisor – including everything necessary, including filing the tax return itself. We are not intermediaries.',
+    'odklad.badge': 'Important – tax deadlines',
+    'odklad.btn': 'Secure your time and peace – defer your tax payment',
+    'section.services.tag': 'Services',
+    'section.services.title': 'Comprehensive care for your finances',
+    'section.services.sub': 'From bookkeeping to tax advice and due diligence. Everything under one roof.',
+    'service.1.title': 'Taxes', 'service.2.title': 'Accounting', 'service.3.title': 'Tax Records',
+    'service.4.title': 'Payroll', 'service.5.title': 'HR Services', 'service.6.title': 'Foreign Language Services',
+    'service.7.title': 'Due Diligence', 'service.8.title': 'EET', 'service.9.title': 'ESF / MPSV',
+    'service.10.title': 'Accounting for Foreigners', 'service.11.title': 'Road Tax', 'service.12.title': 'Training & Seminars',
+    'section.team.tag': 'Our Team',
+    'section.team.title': 'Experts you can rely on',
+    'section.team.sub': 'An experienced team of specialists with extensive practice in accounting, taxes and payroll management.',
+    'team.management': 'Management', 'team.senior': 'Senior Team',
+    'team.accounting': 'Accounting Team', 'team.payroll': 'Payroll Accountants',
+    'section.certs.tag': 'Certificates & Licences',
+    'section.certs.title': 'Verified expertise',
+    'section.certs.sub': 'Our team holds certificates and licences issued by leading professional institutions. We are a Verified Company.',
+    'charity.title': 'We are proud Good Angels!',
+    'charity.text': 'We regularly contribute to Charity Czech Republic and are Good Angels – helping those in need. We help families who have found themselves in a difficult life situation due to serious illness.',
+    'contact.heading': 'Get in Touch',
+    'contact.sub': 'We are happy to advise you. Contact us by phone, email or through our contact form.',
+    'contact.branches': 'Our Branches',
+    'contact.hq': 'Headquarters Vítkov', 'contact.branch': 'Branch Opava',
+    'contact.firm.heading': 'Company Details',
     'form.name': 'Full Name *', 'form.email': 'Email *',
     'form.phone': 'Phone', 'form.service': 'Service of interest',
     'form.subject': 'Subject *', 'form.message': 'Message *',
@@ -1167,12 +1246,9 @@ const T = {
     'form.subheading': 'Free consultation or a question? We will get back to you as soon as possible.',
     'form.success.title': 'Message sent!',
     'form.success.text': 'We will contact you shortly. Thank you for your interest in our services.',
-    'contact.heading': 'Get in Touch',
-    'contact.sub': 'We are happy to advise you. Contact us by phone, email or through our contact form.',
     'footer.tagline': 'Comprehensive accounting, tax and economic advisory. Member of the Chamber of Tax Advisors. Two offices – Vítkov and Opava.',
-    'odklad.badge': 'Important – tax deadlines',
-    'odklad.btn': 'Secure your time and peace – defer your tax payment',
-    'scroll.more': 'Learn more'
+    'footer.copyright': '© 2024 Best Account s.r.o. All rights reserved.',
+    'footer.badge': 'Member of CTAC · Verified Company 2025'
   },
   de: {
     'brand.tagline': 'Buchhaltungs- & Steuerkanzlei',
@@ -1183,8 +1259,46 @@ const T = {
     'hero.title': 'Ihr zuverlässiger<br><span class="accent">Finanzpartner</span>',
     'hero.subtitle': 'Umfassende Buchhaltungs- und Steuerkanzlei in Vítkov und Opava. Persönlicher Ansatz, Fachkenntnis und Diskretion seit 2016.',
     'hero.btn1': 'Kostenlose Beratung', 'hero.btn2': 'Steueraufschub',
+    'scroll.more': 'Mehr erfahren',
     'stats.clients': 'zufriedene Klienten', 'stats.years': 'Jahre Erfahrung',
     'stats.team': 'Spezialisten im Team', 'stats.langs': 'Sprachen (CZ/EN/DE)',
+    'section.about.tag': 'Über uns',
+    'section.about.title': 'Mehr als nur Zahlen',
+    'section.about.sub': 'Wir beraten Klienten sowohl bei der Lösung gewöhnlicher als auch außergewöhnlicher Situationen. Wir berechnen Steuern während des Geschäftsjahres, damit die Steuerpflichten gezielt gesteuert werden können.',
+    'about.1.title': 'Maximale Selbstständigkeit', 'about.2.title': 'Schnelle Reaktion',
+    'about.3.title': 'Zwei Standorte', 'about.4.title': 'Drei Sprachen',
+    'section.why.tag': 'Warum wir?',
+    'section.why.title': 'Vorteile, die Sie schätzen werden',
+    'section.why.sub': 'Suchen Sie Berater, die Ihnen einen persönlichen Ansatz bieten und vernetzt denken? Dann sind Sie bei uns richtig. Wir behandeln Ihre Steuern als wären sie unsere eigenen.',
+    'why.visual.title': 'Unsere Leistungsbereiche',
+    'odklad.title': 'Steueraufschub <span>ohne Sorgen</span>',
+    'odklad.p1': 'Die Pflicht zur Abgabe der Steuererklärung bis Ende März betrifft nicht nur Unternehmer – juristische Personen und Selbstständige – sondern auch Vereine, Stiftungen, gemeinnützige Organisationen und Bürger mit Nebeneinkünften.',
+    'odklad.p2': 'Wer einen Steuerberater hat, hat diese Pflicht bis zum 30. Juni verlängert.',
+    'odklad.p3': 'Wir arrangieren für Sie einen Steueraufschub durch einen Steuerberater – inklusive allem Notwendigen, einschließlich der Einreichung der Steuererklärung selbst. Wir sind keine Vermittler.',
+    'odklad.badge': 'Wichtig – Steuerfristen',
+    'odklad.btn': 'Sichern Sie sich Zeit und Ruhe – verschieben Sie Ihre Steuerzahlung',
+    'section.services.tag': 'Leistungen',
+    'section.services.title': 'Umfassende Betreuung Ihrer Finanzen',
+    'section.services.sub': 'Von der Buchhaltung über Steuerberatung bis hin zur Due Diligence. Alles unter einem Dach.',
+    'service.1.title': 'Steuern', 'service.2.title': 'Buchhaltung', 'service.3.title': 'Steueraufzeichnungen',
+    'service.4.title': 'Lohnabrechnung', 'service.5.title': 'Personalwesen', 'service.6.title': 'Fremdsprachige Agenda',
+    'service.7.title': 'Due Diligence', 'service.8.title': 'EET', 'service.9.title': 'ESF / MPSV',
+    'service.10.title': 'Buchhaltung für Ausländer', 'service.11.title': 'Kraftfahrzeugsteuer', 'service.12.title': 'Schulungen & Seminare',
+    'section.team.tag': 'Unser Team',
+    'section.team.title': 'Experten, auf die Sie sich verlassen können',
+    'section.team.sub': 'Ein erfahrenes Team von Spezialisten mit umfangreicher Praxis in Buchhaltung, Steuern und Lohnabrechnung.',
+    'team.management': 'Unternehmensführung', 'team.senior': 'Senior-Team',
+    'team.accounting': 'Buchhaltungsteam', 'team.payroll': 'Lohnbuchhalter',
+    'section.certs.tag': 'Zertifikate & Lizenzen',
+    'section.certs.title': 'Nachgewiesene Fachkompetenz',
+    'section.certs.sub': 'Unser Team verfügt über Zertifikate und Lizenzen führender Fachinstanzen. Wir sind ein geprüftes Unternehmen.',
+    'charity.title': 'Wir sind stolze Gute Engel!',
+    'charity.text': 'Wir spenden regelmäßig an die Caritas Tschechische Republik und sind Gute Engel – wir helfen Menschen in Not. Wir helfen Familien, die durch schwere Krankheit in eine schwierige Lebenssituation geraten sind.',
+    'contact.heading': 'Kontaktieren Sie uns',
+    'contact.sub': 'Wir beraten Sie gerne. Kontaktieren Sie uns telefonisch, per E-Mail oder über unser Kontaktformular.',
+    'contact.branches': 'Unsere Standorte',
+    'contact.hq': 'Hauptsitz Vítkov', 'contact.branch': 'Niederlassung Opava',
+    'contact.firm.heading': 'Firmendaten',
     'form.name': 'Vor- und Nachname *', 'form.email': 'E-Mail *',
     'form.phone': 'Telefon', 'form.service': 'Gewünschte Leistung',
     'form.subject': 'Betreff *', 'form.message': 'Nachricht *',
@@ -1193,12 +1307,9 @@ const T = {
     'form.subheading': 'Kostenlose Beratung oder eine Frage? Wir melden uns so schnell wie möglich.',
     'form.success.title': 'Nachricht gesendet!',
     'form.success.text': 'Wir werden uns in Kürze bei Ihnen melden. Vielen Dank für Ihr Interesse.',
-    'contact.heading': 'Kontaktieren Sie uns',
-    'contact.sub': 'Wir beraten Sie gerne. Kontaktieren Sie uns telefonisch, per E-Mail oder über unser Kontaktformular.',
     'footer.tagline': 'Umfassende Buchhaltungs-, Steuer- und Wirtschaftsberatung. Mitglied der Kammer der Steuerberater. Zwei Standorte – Vítkov und Opava.',
-    'odklad.badge': 'Wichtig – Steuerfristen',
-    'odklad.btn': 'Sichern Sie sich Zeit und Ruhe – verschieben Sie Ihre Steuerzahlung',
-    'scroll.more': 'Mehr erfahren'
+    'footer.copyright': '© 2024 Best Account s.r.o. Alle Rechte vorbehalten.',
+    'footer.badge': 'Mitglied der STBK · Geprüftes Unternehmen 2025'
   }
 };
 
@@ -1207,63 +1318,127 @@ let currentLang = 'cs';
 function setLang(lang) {
   currentLang = lang;
   const t = T[lang];
-  document.documentElement.lang = lang === 'cs' ? 'cs' : lang;
+  document.documentElement.lang = lang;
 
-  // Update lang buttons
-  document.querySelectorAll('.nav-langs button').forEach(btn => {
+  // Lang buttons (desktop + mobile)
+  document.querySelectorAll('.nav-langs button, #navLinks .mobile-langs button').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.toLowerCase() === (lang === 'cs' ? 'cz' : lang));
   });
 
-  // Text elements
+  // data-i18n text nodes
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (t[key] !== undefined) el.textContent = t[key];
   });
 
-  // HTML elements (hero title etc.)
+  // data-i18n-html nodes
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const key = el.dataset.i18nHtml;
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
 
-  // Stats labels
-  const statLabels = document.querySelectorAll('.stat-label');
-  if (statLabels[0]) statLabels[0].textContent = t['stats.clients'];
-  if (statLabels[1]) statLabels[1].textContent = t['stats.years'];
-  if (statLabels[2]) statLabels[2].textContent = t['stats.team'];
-  if (statLabels[3]) statLabels[3].textContent = t['stats.langs'];
-
-  // Form labels & placeholders
-  const fl = document.querySelectorAll('.form-group label');
-  const fkeys = ['form.name','form.email','form.phone','form.service','form.subject','form.message'];
-  fl.forEach((el,i) => { if(fkeys[i] && t[fkeys[i]]) el.textContent = t[fkeys[i]]; });
-
-  const fh = document.querySelector('.contact-form h3');
-  const fs = document.querySelector('.contact-form > p');
-  if(fh) fh.textContent = t['form.heading'];
-  if(fs) fs.textContent = t['form.subheading'];
-
-  const submitBtn = document.querySelector('.form-submit span') || document.querySelector('.form-submit');
-  if(submitBtn) submitBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9 22,2"/></svg> ${t['form.submit']}`;
-
-  const ch = document.querySelector('#contact .section-title');
-  const cs2 = document.querySelector('#contact .section-sub');
-  if(ch) ch.textContent = t['contact.heading'];
-  if(cs2) cs2.textContent = t['contact.sub'];
-
   // Scroll hint
   const scrollSpan = document.querySelector('.hero-scroll span');
   if(scrollSpan) scrollSpan.textContent = t['scroll.more'];
 
-  // Odklad badge
-  const ob = document.querySelector('.odklad-card .hero-badge span, .odklad-card [style*="FCD34D"] span');
-  if(ob) ob.textContent = t['odklad.badge'];
-  const obBtn = document.querySelector('.odklad-cta .btn-primary span');
-  if(obBtn) obBtn.textContent = t['odklad.btn'];
+  // Stats labels
+  document.querySelectorAll('.stat-label').forEach((el,i) => {
+    const keys = ['stats.clients','stats.years','stats.team','stats.langs'];
+    if(keys[i] && t[keys[i]]) el.textContent = t[keys[i]];
+  });
 
-  // Footer tagline
+  // Section helper
+  const sec = (id, tagK, titleK, subK) => {
+    const s = document.getElementById(id); if(!s) return;
+    const tagEl = s.querySelector('.section-tag');
+    const titleEl = s.querySelector('.section-title');
+    const subEl = s.querySelector('.section-sub');
+    if(tagEl && t[tagK]) tagEl.textContent = t[tagK];
+    if(titleEl && t[titleK]) titleEl.textContent = t[titleK];
+    if(subEl && t[subK]) subEl.textContent = t[subK];
+  };
+  sec('about','section.about.tag','section.about.title','section.about.sub');
+  sec('why','section.why.tag','section.why.title','section.why.sub');
+  sec('services','section.services.tag','section.services.title','section.services.sub');
+  sec('team','section.team.tag','section.team.title','section.team.sub');
+  sec('certs','section.certs.tag','section.certs.title','section.certs.sub');
+
+  // About card titles
+  document.querySelectorAll('#about .about-card h3').forEach((el,i) => {
+    const k = `about.${i+1}.title`; if(t[k]) el.textContent = t[k];
+  });
+
+  // Why visual title
+  const whyVis = document.querySelector('#why .why-visual-title, #why .visual-title, #why h3');
+  if(whyVis && t['why.visual.title']) whyVis.textContent = t['why.visual.title'];
+
+  // Odklad section
+  const odkladTitle = document.querySelector('#odklad .odklad-title, #odklad h2');
+  if(odkladTitle && t['odklad.title']) odkladTitle.innerHTML = t['odklad.title'];
+  const odkladPs = document.querySelectorAll('#odklad .odklad-text p, #odklad > .container p');
+  const opKeys = ['odklad.p1','odklad.p2','odklad.p3'];
+  odkladPs.forEach((el,i) => { if(opKeys[i] && t[opKeys[i]]) el.textContent = t[opKeys[i]]; });
+  const ob = document.querySelector('#odklad .section-tag, #odklad .odklad-badge');
+  if(ob && t['odklad.badge']) ob.textContent = t['odklad.badge'];
+  const obBtn = document.querySelector('#odklad .btn-primary, #odklad .odklad-cta a, #odklad .odklad-cta button');
+  if(obBtn && t['odklad.btn']) {
+    const svg = obBtn.querySelector('svg');
+    obBtn.textContent = t['odklad.btn'];
+    if(svg) obBtn.prepend(svg);
+  }
+
+  // Service card titles
+  document.querySelectorAll('#services .service-card h3').forEach((el,i) => {
+    const k = `service.${i+1}.title`; if(t[k]) el.textContent = t[k];
+  });
+
+  // Team group labels
+  document.querySelectorAll('#team .team-group-label, #team .team-group h3').forEach((el,i) => {
+    const keys = ['team.management','team.senior','team.accounting','team.payroll'];
+    if(keys[i] && t[keys[i]]) el.textContent = t[keys[i]];
+  });
+
+  // Charity
+  const charTitle = document.querySelector('#certs .charity-title, #certs .charity h3');
+  const charText = document.querySelector('#certs .charity-text, #certs .charity p');
+  if(charTitle && t['charity.title']) charTitle.textContent = t['charity.title'];
+  if(charText && t['charity.text']) charText.textContent = t['charity.text'];
+
+  // Contact section
+  const ch = document.querySelector('#contact .section-title');
+  const cs2 = document.querySelector('#contact .section-sub');
+  if(ch) ch.textContent = t['contact.heading'];
+  if(cs2) cs2.textContent = t['contact.sub'];
+  const branchHeading = document.querySelector('#contact .branches-heading, #contact .offices-title');
+  if(branchHeading && t['contact.branches']) branchHeading.textContent = t['contact.branches'];
+  const officeLabels = document.querySelectorAll('#contact .office-label, #contact .office-name');
+  if(officeLabels[0] && t['contact.hq']) officeLabels[0].textContent = t['contact.hq'];
+  if(officeLabels[1] && t['contact.branch']) officeLabels[1].textContent = t['contact.branch'];
+  const firmHeading = document.querySelector('#contact .firm-heading, #contact .firm-info h3');
+  if(firmHeading && t['contact.firm.heading']) firmHeading.textContent = t['contact.firm.heading'];
+
+  // Form
+  const fl = document.querySelectorAll('.form-group label');
+  const fkeys = ['form.name','form.email','form.phone','form.service','form.subject','form.message'];
+  fl.forEach((el,i) => { if(fkeys[i] && t[fkeys[i]]) el.textContent = t[fkeys[i]]; });
+  const fh = document.querySelector('.contact-form h3');
+  const fs = document.querySelector('.contact-form > p');
+  if(fh) fh.textContent = t['form.heading'];
+  if(fs) fs.textContent = t['form.subheading'];
+  const submitBtn = document.querySelector('.form-submit');
+  if(submitBtn && t['form.submit']) {
+    const svg = submitBtn.querySelector('svg');
+    submitBtn.innerHTML = t['form.submit'];
+    if(svg) submitBtn.prepend(svg);
+  }
+
+  // Footer
   const ftag = document.querySelector('.footer-brand > p');
   if(ftag) ftag.textContent = t['footer.tagline'];
+  const fcopy = document.querySelector('.footer-bottom p, .footer-copy');
+  if(fcopy && t['footer.copyright']) fcopy.textContent = t['footer.copyright'];
+  const fbadge = document.querySelector('.footer-bottom .footer-badge, .footer-kdp');
+  if(fbadge && t['footer.badge']) fbadge.textContent = t['footer.badge'];
 }
 
 // ── NAVIGATION ──
