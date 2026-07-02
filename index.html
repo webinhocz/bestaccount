@@ -342,8 +342,9 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);paddin
 
 /* ── MOBILE NAV ── */
 @media(max-width:900px){
-  .nav-links{display:none;position:fixed;top:70px;left:0;right:0;background:var(--navy);padding:1.5rem;flex-direction:column;gap:1rem;border-bottom:1px solid rgba(255,255,255,.08);z-index:99}
+  .nav-links{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(15,23,42,.98);padding:1.25rem 1.5rem;flex-direction:column;gap:.75rem;border-bottom:1px solid rgba(255,255,255,.08);z-index:99}
   .nav-links.open{display:flex}
+  .nav-links a{font-size:.95rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
   .hamburger{display:flex}
   .why-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
@@ -351,12 +352,60 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);paddin
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .form-row{grid-template-columns:1fr}
 }
-@media(max-width:600px){
+
+@media(max-width:640px){
+  /* Navbar */
+  #navbar{padding:0 1rem}
+  .nav-langs{display:none}
+  .nav-cta{display:none}
+  .nav-brand-text span{font-size:.95rem}
+  .nav-brand-text small{display:none}
+  .nav-logo{width:34px;height:34px}
+
+  /* Hero */
+  .hero-content{padding:1.25rem}
+  .hero-buttons{flex-direction:column;align-items:stretch;gap:.75rem;width:100%}
+  .btn-primary,.btn-outline{justify-content:center;width:100%;padding:.9rem}
+
+  /* Stats */
+  .stats-grid{grid-template-columns:1fr 1fr;gap:0}
+  .stat-num{font-size:1.8rem}
+
+  /* Sections */
+  .section{padding:3rem 1.25rem}
+  .section-title{font-size:1.6rem}
+  .services-grid{grid-template-columns:1fr}
+  .certs-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+
+  /* About 2-col inline grid → 1 col */
+  .about-cards{grid-template-columns:1fr !important}
+
+  /* Why visual */
+  .why-visual{margin-top:1.5rem}
+
+  /* Odklad card */
+  .odklad-card{padding:2rem 1.25rem}
+
+  /* Contact */
+  .contact-form{padding:1.5rem 1.25rem}
+
+  /* Footer */
   .footer-grid{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .hero-buttons{flex-direction:column;align-items:center}
-  .charity-section{flex-direction:column}
+  .footer-bottom{flex-direction:column;text-align:center;gap:.5rem}
+
+  /* Charity */
+  .charity-section{flex-direction:column;gap:1rem}
+
+  /* Mobile nav lang buttons inside menu */
+  .nav-links .mobile-langs{display:flex;gap:.5rem;padding-top:.5rem}
+  .nav-links .mobile-langs button{background:rgba(3,105,161,.2);border:1px solid rgba(3,105,161,.3);color:#7DD3FC;padding:.35rem .9rem;border-radius:6px;font-size:.85rem;cursor:pointer}
+  .nav-links .mobile-langs button.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+  /* Footer nav hide 2 cols */
+  .footer-col:nth-child(3){display:none}
 }
+
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
@@ -381,6 +430,12 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);paddin
     <li><a onclick="goTo('team')" data-i18n="nav.team">Tým</a></li>
     <li><a onclick="goTo('certs')" data-i18n="nav.certs">Certifikáty</a></li>
     <li><a onclick="goTo('contact')" data-i18n="nav.contact">Kontakt</a></li>
+    <li class="mobile-langs">
+      <button onclick="setLang('cs')" class="active" id="mlCZ">CZ</button>
+      <button onclick="setLang('en')" id="mlEN">EN</button>
+      <button onclick="setLang('de')" id="mlDE">DE</button>
+    </li>
+    <li style="margin-top:.25rem"><button class="nav-cta" style="width:100%" onclick="goTo('contact')" data-i18n="nav.cta">Kontaktujte nás</button></li>
   </ul>
 
   <div class="nav-right">
@@ -462,7 +517,7 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.06);paddin
       <h2 class="section-title" style="color:#fff">Víc než jen čísla</h2>
       <p class="section-sub">Klientům radíme jak při řešení běžných situací, tak nestandardních postupů. Provádíme kalkulaci daní během účetního období tak, aby bylo možno daňové povinnosti konkrétně řídit.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem">
+    <div class="about-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem">
       <div class="cert-card reveal" style="transition-delay:.1s">
         <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
         <div class="cert-body"><h4>Maximální samostatnost</h4><p>Od prvopočátečního sběru dokladů přes automatické zasílání pravidelných reportů.</p></div>

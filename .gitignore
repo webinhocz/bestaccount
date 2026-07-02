@@ -1,0 +1,6 @@
+.vercel
+
+*.png
+!logo.png
+.DS_Store
+.claude/
