@@ -64,20 +64,17 @@ img{max-width:100%}
 }
 .hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .hero-particle{
-  position:absolute;border-radius:50%;
-  animation:float linear infinite;opacity:.07;
+  position:absolute;font-size:1.8rem;line-height:1;
+  animation:floatEmoji linear infinite;opacity:.13;
+  user-select:none;pointer-events:none;
 }
-@keyframes float{
-  0%{transform:translateY(100vh) rotate(0)}
-  100%{transform:translateY(-10vh) rotate(360deg)}
+@keyframes floatEmoji{
+  0%{transform:translateY(100vh) rotate(-15deg);opacity:0}
+  5%{opacity:.13}
+  95%{opacity:.13}
+  100%{transform:translateY(-12vh) rotate(15deg);opacity:0}
 }
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(79,142,247,.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(79,142,247,.05) 1px,transparent 1px);
-  background-size:80px 80px;
-}
+.hero-grid{display:none}
 .hero-glow{
   position:absolute;width:600px;height:600px;border-radius:50%;
   background:radial-gradient(circle,rgba(24,73,190,.15) 0%,transparent 65%);
@@ -1143,12 +1140,29 @@ const T = {
     'section.about.tag': 'O nás',
     'section.about.title': 'Víc než jen čísla',
     'section.about.sub': 'Klientům radíme jak při řešení běžných situací, tak nestandardních postupů. Provádíme kalkulaci daní během účetního období tak, aby bylo možno daňové povinnosti konkrétně řídit.',
-    'about.1.title': 'Maximální samostatnost', 'about.2.title': 'Pohotová reakce',
-    'about.3.title': 'Dvě pobočky', 'about.4.title': 'Tři jazyky',
+    'about.1.title': 'Maximální samostatnost', 'about.1.text': 'Od prvopočátečního sběru dokladů přes automatické zasílání pravidelných reportů.',
+    'about.2.title': 'Pohotová reakce', 'about.2.text': 'Maximální provázanost s procesy Vaší společnosti – účetní, daňové i ekonomické poradenství.',
+    'about.3.title': 'Dvě pobočky', 'about.3.text': 'Centrála Vítkov + pobočka Opava. Dostupní pro klienty z celého regionu.',
+    'about.4.title': 'Tři jazyky', 'about.4.text': 'Komplexní ekonomická agenda v češtině, angličtině i němčině. Cizojazyčné překlady odborných textů.',
+    'about.check.1': 'Společnost nabízí zcela nový přístup vedení účetnictví a daňové evidence',
+    'about.check.2': 'Poskytuje daňové poradenské služby a odložení daňových přiznání',
+    'about.check.3': 'Profesionální zpracování všech typů daňových přiznání daňovým poradcem',
+    'about.check.4': 'Usiluje o sjednocení všech ekonomických a provozních činností',
+    'about.check.5': 'Provádíme analýzy a reporty o hospodaření Vaší firmy',
     'section.why.tag': 'Proč k nám?',
     'section.why.title': 'Přednosti, které oceníte',
     'section.why.sub': 'Hledáte poradce, kteří vám nabídnou osobní přístup a myslí v souvislostech? Jste na správném místě. Vaše daně děláme jako by byly naše.',
+    'why.1': 'Jsme komplexní účetní a daňová kancelář – vše pod jednou střechou',
+    'why.2': 'Víme, kde a jak Vám ušetříme peníze – daňová optimalizace je naší prioritou',
+    'why.3': 'Nalézat efektivitu tam kde není, je naším prvořadým cílem',
+    'why.4': 'Rozbory a analýzy Vašeho hospodaření jsou naší předností',
+    'why.5': 'Flexibilní sběr účetních dokladů vedoucí k okamžité informovanosti',
+    'why.6': 'Zastoupíme Vás v daňových řízeních – daňová kontrola, spory, opravné prostředky',
+    'why.7': 'Daňové poradenství pro Vás i Vašeho účetního – partnerská spolupráce',
     'why.visual.title': 'Oblasti našich služeb',
+    'why.tags': 'Daně,Hospodářské reporty,Daňové evidence,Účetnictví,Analýzy,Ekonomika,Daňová optimalizace,Finanční úspora,Odklad daní,Daňový poradce,Mzdová agenda,Personalistika,Due Diligence,EET,ESF/MPSV,BOZP a PO,Překlady EN/DE',
+    'eservis.title': 'E-Servis',
+    'eservis.text': 'Prostřednictvím on-line formuláře poskytujeme účetní, ekonomické a daňové poradenství včetně tvorby závazkových vztahů. Komunikujte s daňovou kanceláří vzdáleně – vyřešíme jakýkoliv Váš problém včas.',
     'odklad.title': 'Odklad <span>daní</span> bez starostí',
     'odklad.p1': 'Povinnost podat daňové přiznání do konce března nemají jen podnikatelé – právnické osoby a živnostníci, ale také veškerá sdružení, nadace, veřejně prospěšné organizace a občané s vedlejšími příjmy.',
     'odklad.p2': 'Ti, co mají daňového poradce, mají tuto povinnost posunutou do 30. června.',
@@ -1204,12 +1218,29 @@ const T = {
     'section.about.tag': 'About Us',
     'section.about.title': 'More than just numbers',
     'section.about.sub': 'We advise clients on both standard and non-standard procedures. We calculate taxes during the accounting period so that tax obligations can be specifically managed.',
-    'about.1.title': 'Maximum Independence', 'about.2.title': 'Quick Response',
-    'about.3.title': 'Two Branches', 'about.4.title': 'Three Languages',
+    'about.1.title': 'Maximum Independence', 'about.1.text': 'From initial document collection to automatic dispatch of regular reports.',
+    'about.2.title': 'Quick Response', 'about.2.text': 'Maximum integration with your company\'s processes – accounting, tax and economic advisory.',
+    'about.3.title': 'Two Branches', 'about.3.text': 'Headquarters in Vítkov + branch in Opava. Available to clients across the region.',
+    'about.4.title': 'Three Languages', 'about.4.text': 'Comprehensive economic agenda in Czech, English and German. Professional translations of specialist texts.',
+    'about.check.1': 'The company offers a completely new approach to bookkeeping and tax records',
+    'about.check.2': 'Provides tax advisory services and deferral of tax returns',
+    'about.check.3': 'Professional processing of all types of tax returns by a tax advisor',
+    'about.check.4': 'Strives to unify all economic and operational activities',
+    'about.check.5': 'We perform analyses and reports on your company\'s financial management',
     'section.why.tag': 'Why Us?',
     'section.why.title': 'Advantages you will appreciate',
     'section.why.sub': 'Looking for advisors who offer a personal approach and think holistically? You are in the right place. We treat your taxes as if they were our own.',
+    'why.1': 'We are a comprehensive accounting and tax office – everything under one roof',
+    'why.2': 'We know where and how to save you money – tax optimisation is our priority',
+    'why.3': 'Finding efficiency where there is none is our primary goal',
+    'why.4': 'Analyses and reviews of your financial management are our strength',
+    'why.5': 'Flexible collection of accounting documents leading to immediate information',
+    'why.6': 'We represent you in tax proceedings – tax audits, disputes, corrective measures',
+    'why.7': 'Tax advisory for you and your accountant – a partner-based collaboration',
     'why.visual.title': 'Our Service Areas',
+    'why.tags': 'Taxes,Financial Reports,Tax Records,Accounting,Analyses,Economics,Tax Optimisation,Financial Savings,Tax Deferral,Tax Advisor,Payroll,HR Services,Due Diligence,EET,ESF/MPSV,Health & Safety,EN/DE Translations',
+    'eservis.title': 'E-Service',
+    'eservis.text': 'Through our online form we provide accounting, economic and tax advisory including the creation of contractual relationships. Communicate with the tax office remotely – we will resolve any issue promptly.',
     'odklad.title': 'Tax Deferral <span>Without Worries</span>',
     'odklad.p1': 'The obligation to file a tax return by the end of March applies not only to entrepreneurs – legal entities and sole traders – but also to all associations, foundations, non-profit organisations and citizens with secondary income.',
     'odklad.p2': 'Those who have a tax advisor have this obligation extended to 30 June.',
@@ -1265,12 +1296,29 @@ const T = {
     'section.about.tag': 'Über uns',
     'section.about.title': 'Mehr als nur Zahlen',
     'section.about.sub': 'Wir beraten Klienten sowohl bei der Lösung gewöhnlicher als auch außergewöhnlicher Situationen. Wir berechnen Steuern während des Geschäftsjahres, damit die Steuerpflichten gezielt gesteuert werden können.',
-    'about.1.title': 'Maximale Selbstständigkeit', 'about.2.title': 'Schnelle Reaktion',
-    'about.3.title': 'Zwei Standorte', 'about.4.title': 'Drei Sprachen',
+    'about.1.title': 'Maximale Selbstständigkeit', 'about.1.text': 'Von der anfänglichen Belegsammlung bis zum automatischen Versand regelmäßiger Berichte.',
+    'about.2.title': 'Schnelle Reaktion', 'about.2.text': 'Maximale Vernetzung mit den Prozessen Ihres Unternehmens – Buchhaltungs-, Steuer- und Wirtschaftsberatung.',
+    'about.3.title': 'Zwei Standorte', 'about.3.text': 'Hauptsitz Vítkov + Niederlassung Opava. Für Klienten aus der gesamten Region erreichbar.',
+    'about.4.title': 'Drei Sprachen', 'about.4.text': 'Umfassende Wirtschaftsagenda auf Tschechisch, Englisch und Deutsch. Fremdsprachige Fachübersetzungen.',
+    'about.check.1': 'Das Unternehmen bietet einen völlig neuen Ansatz zur Buchführung und Steueraufzeichnung',
+    'about.check.2': 'Bietet Steuerberatungsleistungen und Aufschub von Steuererklärungen',
+    'about.check.3': 'Professionelle Bearbeitung aller Arten von Steuererklärungen durch einen Steuerberater',
+    'about.check.4': 'Strebt die Vereinheitlichung aller wirtschaftlichen und betrieblichen Tätigkeiten an',
+    'about.check.5': 'Wir erstellen Analysen und Berichte über die Finanzlage Ihres Unternehmens',
     'section.why.tag': 'Warum wir?',
     'section.why.title': 'Vorteile, die Sie schätzen werden',
     'section.why.sub': 'Suchen Sie Berater, die Ihnen einen persönlichen Ansatz bieten und vernetzt denken? Dann sind Sie bei uns richtig. Wir behandeln Ihre Steuern als wären sie unsere eigenen.',
+    'why.1': 'Wir sind eine umfassende Buchhaltungs- und Steuerkanzlei – alles unter einem Dach',
+    'why.2': 'Wir wissen, wo und wie wir Ihnen Geld sparen – Steueroptimierung ist unsere Priorität',
+    'why.3': 'Effizienz dort zu finden, wo keine ist, ist unser oberstes Ziel',
+    'why.4': 'Analysen und Überprüfungen Ihrer Finanzlage sind unsere Stärke',
+    'why.5': 'Flexible Belegerfassung für sofortige Transparenz',
+    'why.6': 'Wir vertreten Sie in Steuerverfahren – Steuerprüfungen, Streitigkeiten, Rechtsmittel',
+    'why.7': 'Steuerberatung für Sie und Ihren Buchhalter – partnerschaftliche Zusammenarbeit',
     'why.visual.title': 'Unsere Leistungsbereiche',
+    'why.tags': 'Steuern,Finanzberichte,Steueraufzeichnungen,Buchhaltung,Analysen,Wirtschaft,Steueroptimierung,Finanzersparnis,Steueraufschub,Steuerberater,Lohnabrechnung,Personalwesen,Due Diligence,EET,ESF/MPSV,Arbeitssicherheit,EN/DE Übersetzungen',
+    'eservis.title': 'E-Service',
+    'eservis.text': 'Über unser Online-Formular bieten wir Buchhaltungs-, Wirtschafts- und Steuerberatung einschließlich der Erstellung von Vertragsverhältnissen an. Kommunizieren Sie mit der Steuerkanzlei aus der Ferne – wir lösen jedes Problem zeitnah.',
     'odklad.title': 'Steueraufschub <span>ohne Sorgen</span>',
     'odklad.p1': 'Die Pflicht zur Abgabe der Steuererklärung bis Ende März betrifft nicht nur Unternehmer – juristische Personen und Selbstständige – sondern auch Vereine, Stiftungen, gemeinnützige Organisationen und Bürger mit Nebeneinkünften.',
     'odklad.p2': 'Wer einen Steuerberater hat, hat diese Pflicht bis zum 30. Juni verlängert.',
@@ -1363,29 +1411,54 @@ function setLang(lang) {
   sec('team','section.team.tag','section.team.title','section.team.sub');
   sec('certs','section.certs.tag','section.certs.title','section.certs.sub');
 
-  // About card titles
-  document.querySelectorAll('#about .about-card h3').forEach((el,i) => {
-    const k = `about.${i+1}.title`; if(t[k]) el.textContent = t[k];
+  // About card titles + descriptions
+  document.querySelectorAll('#about .cert-card').forEach((el,i) => {
+    const h = el.querySelector('h4'); const p = el.querySelector('p');
+    if(h && t[`about.${i+1}.title`]) h.textContent = t[`about.${i+1}.title`];
+    if(p && t[`about.${i+1}.text`]) p.textContent = t[`about.${i+1}.text`];
+  });
+
+  // About checkmark items
+  document.querySelectorAll('#about ul .why-item p').forEach((el,i) => {
+    const k = `about.check.${i+1}`; if(t[k]) el.textContent = t[k];
+  });
+
+  // Why items
+  document.querySelectorAll('#why .why-item p').forEach((el,i) => {
+    const k = `why.${i+1}`; if(t[k]) el.textContent = t[k];
   });
 
   // Why visual title
-  const whyVis = document.querySelector('#why .why-visual-title, #why .visual-title, #why h3');
+  const whyVis = document.querySelector('#why .why-visual-title, #why .why-visual p:first-child, #why .why-visual > p');
   if(whyVis && t['why.visual.title']) whyVis.textContent = t['why.visual.title'];
 
-  // Odklad section
-  const odkladTitle = document.querySelector('#odklad .odklad-title, #odklad h2');
-  if(odkladTitle && t['odklad.title']) odkladTitle.innerHTML = t['odklad.title'];
-  const odkladPs = document.querySelectorAll('#odklad .odklad-text p, #odklad > .container p');
-  const opKeys = ['odklad.p1','odklad.p2','odklad.p3'];
-  odkladPs.forEach((el,i) => { if(opKeys[i] && t[opKeys[i]]) el.textContent = t[opKeys[i]]; });
-  const ob = document.querySelector('#odklad .section-tag, #odklad .odklad-badge');
-  if(ob && t['odklad.badge']) ob.textContent = t['odklad.badge'];
-  const obBtn = document.querySelector('#odklad .btn-primary, #odklad .odklad-cta a, #odklad .odklad-cta button');
-  if(obBtn && t['odklad.btn']) {
-    const svg = obBtn.querySelector('svg');
-    obBtn.textContent = t['odklad.btn'];
-    if(svg) obBtn.prepend(svg);
+  // Why tags
+  if(t['why.tags']) {
+    const tagEls = document.querySelectorAll('#why .why-tag');
+    const tags = t['why.tags'].split(',');
+    tagEls.forEach((el,i) => { if(tags[i]) el.textContent = tags[i]; });
   }
+
+  // E-Servis
+  const eTitle = document.querySelector('#why h4');
+  const eText = document.querySelector('#why h4 + p');
+  if(eTitle && t['eservis.title']) eTitle.textContent = t['eservis.title'];
+  if(eText && t['eservis.text']) eText.textContent = t['eservis.text'];
+
+  // Odklad section
+  const odkladTitle = document.querySelector('#odklad h2');
+  if(odkladTitle && t['odklad.title']) odkladTitle.innerHTML = t['odklad.title'];
+  const odkladPs = document.querySelectorAll('#odklad .odklad-card > p');
+  if(odkladPs[0] && t['odklad.p1']) odkladPs[0].textContent = t['odklad.p1'];
+  if(odkladPs[1] && t['odklad.p2']) odkladPs[1].innerHTML = `<strong style="color:#7DD3FC">${t['odklad.p2']}</strong>`;
+  if(odkladPs[2] && t['odklad.p3']) odkladPs[2].textContent = t['odklad.p3'];
+  // odklad badge is a plain text node inside its div — find it by its text child
+  document.querySelectorAll('#odklad .odklad-card > div').forEach(div => {
+    if(div.querySelector('svg') && t['odklad.badge']) {
+      const tn = [...div.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if(tn) tn.textContent = ' ' + t['odklad.badge'];
+    }
+  });
 
   // Service card titles
   document.querySelectorAll('#services .service-card h3').forEach((el,i) => {
@@ -1483,21 +1556,21 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: .5 });
 document.querySelectorAll('.stat-num[data-target]').forEach(el => countObserver.observe(el));
 
-// ── PARTICLES ──
+// ── EMOJI PARTICLES ──
 (() => {
   const container = document.getElementById('particles');
-  const colors = ['#0369A1', '#0EA5E9', '#38BDF8', '#7DD3FC'];
-  for (let i = 0; i < 20; i++) {
+  const emojis = ['📊','📈','💰','🧾','📋','💼','🏦','📉','💹','🗂️','📌','💡','📝','🔢','⚖️','🏛️','💳','🤝'];
+  for (let i = 0; i < 22; i++) {
     const p = document.createElement('div');
     p.className = 'hero-particle';
-    const size = Math.random() * 6 + 3;
+    p.textContent = emojis[i % emojis.length];
+    const size = Math.random() * 14 + 18;
     Object.assign(p.style, {
-      width: size + 'px', height: size + 'px',
-      background: colors[Math.floor(Math.random() * colors.length)],
-      left: Math.random() * 100 + '%',
-      bottom: '-10px',
-      animationDuration: (Math.random() * 15 + 10) + 's',
-      animationDelay: (Math.random() * 10) + 's',
+      fontSize: size + 'px',
+      left: (Math.random() * 98) + '%',
+      bottom: '-60px',
+      animationDuration: (Math.random() * 20 + 14) + 's',
+      animationDelay: (Math.random() * 12) + 's',
     });
     container.appendChild(p);
   }
